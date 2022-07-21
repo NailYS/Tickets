@@ -13,5 +13,6 @@ public interface TicketService {
 
     void deleteTicket(long id);
 
-    TicketDto archivingDto(long id);
+    TicketDto archivingTicket(long id);
+
 }

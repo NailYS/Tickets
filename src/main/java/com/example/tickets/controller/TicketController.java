@@ -35,8 +35,8 @@ public class TicketController {
         ticketService.deleteTicket(id);
     }
 
-//    @DeleteMapping("/{id}")
-//    public TicketDto archivingDto() {
-//        return null;
-//    }
+    @PostMapping("archiving/{id}")
+    public TicketDto archivingTicket(@PathVariable(name = "id") Long id) {
+        return ticketService.archivingTicket(id );
+    }
 }

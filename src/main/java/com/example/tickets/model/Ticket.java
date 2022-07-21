@@ -22,7 +22,7 @@ import java.sql.Timestamp;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Ticket {
+public class    Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -32,4 +32,5 @@ public class Ticket {
     private String description;
     @UpdateTimestamp
     private Timestamp timeChange;
+    private boolean isActive = true;
 }
