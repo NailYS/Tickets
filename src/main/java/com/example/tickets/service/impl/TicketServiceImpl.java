@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -26,8 +25,10 @@ public class TicketServiceImpl implements TicketService {
         List<Ticket> ticketList = ticketRepository.findAll();
         List<TicketDto> ticketDtos = new ArrayList<>();
         for (Ticket ticket : ticketList) {
-            if (ticket.isActive() == true) {
+            if (ticket.getIsActive() == true) {
                 ticketDtos.add(ticketsMapper.toDto(ticket));
+            } else {
+                System.out.println("false");
             }
         }
         return ticketDtos;
@@ -60,9 +61,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public TicketDto archivingTicket(long id) {
-        Ticket ticket = new Ticket();
-        ticketRepository.findById(id);
-        ticket.setActive(false);
+        ticketRepository.findTicketById(id).setIsActive(false);
         return null;
     }
 }
