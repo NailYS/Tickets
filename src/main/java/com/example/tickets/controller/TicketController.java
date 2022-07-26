@@ -32,11 +32,22 @@ public class TicketController {
 
     @DeleteMapping("/{id}")
     public void deleteTicket(@PathVariable(name = "id") Long id) {
-        ticketService.  deleteTicket(id);
+        ticketService.deleteTicket(id);
     }
 
     @PostMapping("archiving/{id}")
     public TicketDto archivingTicket(@PathVariable(name = "id") Long id) {
         return ticketService.archivingTicket(id);
     }
+
+    @PostMapping("unzipping/{id}")
+    public TicketDto unzippingTicket(@PathVariable(name = "id") Long id) {
+        return ticketService.unzippingTicket(id);
+    }
+
+    @GetMapping("get_archivingTicket")
+    public List<TicketDto> getArchivingTicket() {
+        return ticketService.getArchivingTicket();
+    }
+
 }

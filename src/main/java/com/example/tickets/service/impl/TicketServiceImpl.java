@@ -27,8 +27,6 @@ public class TicketServiceImpl implements TicketService {
         for (Ticket ticket : ticketList) {
             if (ticket.getIsActive() == true) {
                 ticketDtos.add(ticketsMapper.toDto(ticket));
-            } else {
-                System.out.println("false");
             }
         }
         return ticketDtos;
@@ -61,7 +59,29 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public TicketDto archivingTicket(long id) {
-        ticketRepository.findTicketById(id).setIsActive(false);
-        return null;
+        Ticket ticket = ticketRepository.findTicketById(id);
+        ticket.setIsActive(false);
+        TicketDto ticketDto = ticketsMapper.toDto(ticketRepository.save(ticket));
+        return ticketDto;
+    }
+
+    @Override
+    public TicketDto unzippingTicket(long id) {
+        Ticket ticket = ticketRepository.findTicketById(id);
+        ticket.setIsActive(true);
+        TicketDto ticketDto = ticketsMapper.toDto(ticketRepository.save(ticket));
+        return ticketDto;
+    }
+
+    @Override
+    public List<TicketDto> getArchivingTicket() {
+        List<Ticket> ticketList = ticketRepository.findAll();
+        List<TicketDto> ticketDtoList = new ArrayList<>();
+        for (Ticket ticket : ticketList) {
+            if (ticket.getIsActive() == false) {
+                ticketDtoList.add(ticketsMapper.toDto(ticket));
+            }
+        }
+        return ticketDtoList;
     }
 }

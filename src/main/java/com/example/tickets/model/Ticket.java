@@ -28,6 +28,5 @@ public class Ticket {
     private String description;
     @UpdateTimestamp
     private Timestamp timeChange;
-    @Column(columnDefinition = "boolean default true")
-    private Boolean isActive;
+    private Boolean isActive = true;
 }
