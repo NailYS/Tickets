@@ -8,7 +8,8 @@ import java.util.List;
 
 @Repository
 public interface TicketRepository extends CrudRepository<Ticket, Long> {
-    List<Ticket> findAll();
+    List<Ticket> findTicketByIsActive(Boolean isActive);
 
     Ticket findTicketById(long id);
+
 }

@@ -46,8 +46,8 @@ public class TicketController {
     }
 
     @GetMapping("get_archivingTicket")
-    public List<TicketDto> getArchivingTicket() {
-        return ticketService.getArchivingTicket();
+    public List<TicketDto> getArchivingTickets() {
+        return ticketService.getArchivingTickets();
     }
 
 }

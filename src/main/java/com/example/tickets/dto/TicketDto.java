@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 @Data
 public class TicketDto {
-    private Boolean isActive= true;
+    private Boolean isActive = true;
     private long id;
     private Timestamp timeOfCreation;
     private String name;

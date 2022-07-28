@@ -17,5 +17,5 @@ public interface TicketService {
 
     TicketDto unzippingTicket(long id);
 
-    List<TicketDto> getArchivingTicket();
+    List<TicketDto> getArchivingTickets();
 }
