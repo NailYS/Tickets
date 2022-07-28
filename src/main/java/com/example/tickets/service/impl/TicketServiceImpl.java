@@ -12,6 +12,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Service
 @RequiredArgsConstructor
 
@@ -24,7 +25,9 @@ public class TicketServiceImpl implements TicketService {
         List<Ticket> ticketList = ticketRepository.findAll();
         List<TicketDto> ticketDtos = new ArrayList<>();
         for (Ticket ticket : ticketList) {
-            ticketDtos.add(ticketsMapper.toDto(ticket));
+            if (ticket.getIsActive() == true) {
+                ticketDtos.add(ticketsMapper.toDto(ticket));
+            }
         }
         return ticketDtos;
     }
@@ -55,7 +58,30 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public TicketDto archivingDto(long id) {
-        return null;
+    public TicketDto archivingTicket(long id) {
+        Ticket ticket = ticketRepository.findTicketById(id);
+        ticket.setIsActive(false);
+        TicketDto ticketDto = ticketsMapper.toDto(ticketRepository.save(ticket));
+        return ticketDto;
+    }
+
+    @Override
+    public TicketDto unzippingTicket(long id) {
+        Ticket ticket = ticketRepository.findTicketById(id);
+        ticket.setIsActive(true);
+        TicketDto ticketDto = ticketsMapper.toDto(ticketRepository.save(ticket));
+        return ticketDto;
+    }
+
+    @Override
+    public List<TicketDto> getArchivingTicket() {
+        List<Ticket> ticketList = ticketRepository.findAll();
+        List<TicketDto> ticketDtoList = new ArrayList<>();
+        for (Ticket ticket : ticketList) {
+            if (ticket.getIsActive() == false) {
+                ticketDtoList.add(ticketsMapper.toDto(ticket));
+            }
+        }
+        return ticketDtoList;
     }
 }

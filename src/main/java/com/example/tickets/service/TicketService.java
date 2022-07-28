@@ -13,5 +13,9 @@ public interface TicketService {
 
     void deleteTicket(long id);
 
-    TicketDto archivingDto(long id);
+    TicketDto archivingTicket(long id);
+
+    TicketDto unzippingTicket(long id);
+
+    List<TicketDto> getArchivingTickets();
 }
